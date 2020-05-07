@@ -67,7 +67,6 @@ $router->post('/add/(\w*)', function($secret) use($html_template, $config, $requ
 
     $type = null;
     if (substr($img, 0, 6) === 'GIF89a') {
-        return;
         $type = 'gif';
     } elseif (substr($img, 8, 4) === 'WEBP') {
         $type = 'webp';
