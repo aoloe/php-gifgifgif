@@ -1,0 +1,11 @@
+ul.list {
+  list-style-type: none;
+  padding-left: 0;
+}
+ul.list li {
+  display: inline-block;
+}
+
+ul.list li img {
+  max-width:200px;
+}
