@@ -78,7 +78,7 @@ $router->post('/add/(\w*)', function($secret) use($html_template, $config, $requ
 
     $response->respond(Aoloe\TinyTemplate::factory()->
         add('title', 'Added')->
-        add('body', '<p><a href="'.$request->get_url($name. '/image.'.$type).'">'.$name.'</a></p>')->
+        add('body', '<p><a href="'.$request->get_url($name. '/'.$type.'/view').'">'.$name.'</a></p>')->
         fetch($html_template));
 });
 
