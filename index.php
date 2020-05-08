@@ -44,16 +44,14 @@ $router->get('/add/(\w*)', function($secret) use ($html_template, $config, $resp
         $response->error_404();
         return;
     }
-    $form = <<<'EOT'
-  <form method="post">
-  <p>Url: <input name="url"><input type="submit" value="»"></p>
-  </form>
-EOT;
-    $template = new Aoloe\TinyTemplate();
-    $template->
+    $response->respond(Aoloe\TinyTemplate::factory()->
         add('title', 'Add')->
-        add('body', $form);
-    $response->respond($template->fetch($html_template));
+        add('body', <<<'EOT'
+          <form method="post">
+          <p>Url: <input name="url"><input type="submit" value="»"></p>
+          </form>
+        EOT)->
+        fetch($html_template));
 });
 
 $router->post('/add/(\w*)', function($secret) use($html_template, $config, $request, $response) {
@@ -76,9 +74,11 @@ $router->post('/add/(\w*)', function($secret) use($html_template, $config, $requ
     $name = uuidv4();
     file_put_contents($config['media'].'/'.$name.'.'.$type, $img);
 
+    $list_html = "<p><a href=\"{$request->get_url()}/list/{$secret}\">List</a></p>";
+
     $response->respond(Aoloe\TinyTemplate::factory()->
         add('title', 'Added')->
-        add('body', '<p><a href="'.$request->get_url($name. '/'.$type.'/view').'">'.$name.'</a></p>')->
+        add('body', $list_html.'<p><a href="'.$request->get_url($name. '/'.$type.'/view').'">'.$name.'</a></p>')->
         fetch($html_template));
 });
 
@@ -107,13 +107,12 @@ $router->get('/([a-z0-9-\.]+)/(gif|webp)/view', function($image, $type) use ($co
       </body>
     </html>
     EOT;
-    $template = new Aoloe\TinyTemplate();
-    $template->
+    $response->respond(Aoloe\TinyTemplate::factory()->
         add('title', 'da gif')->
         add('url', $request->get_url())->
         add('preview', $request->get_url($image.'/preview.'.$type))->
-        add('image', $request->get_url($image.'/image.'.$type));
-    $response->respond($template->fetch($view_template));
+        add('image', $request->get_url($image.'/image.'.$type))->
+        fetch($view_template));
 });
 
 $router->get('/([a-z0-9-\.]+)/image.(gif|webp)', function($image, $type) use ($config, $response) {
@@ -186,10 +185,7 @@ $router->get('/list/(\w*)', function($secret) use ($html_template, $config, $req
                 '<li><a href="{{url}}"><img src="{{url_preview}}"></a></li>');
     }, $request);
 
-    $add_html = Aoloe\TinyTemplate::factory()->
-        add('url', $request->get_url())->
-        add('secret', $secret)->
-        fetch('<p><a href="{{url}}/add/{{secret}}">Add</a></p>');
+    $add_html = "<p><a href=\"{$request->get_url()}/add/{$secret}\">Add</a></p>";
 
     $response->respond(Aoloe\TinyTemplate::factory()->
         add('title', 'My Gifs')->
