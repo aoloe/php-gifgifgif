@@ -1,14 +1,15 @@
 # gif gif gif
 
-Download animated gifs from an url and provide a _good quality_ url.
+Download animated Gifs from an url and provide a _good quality_ url.
 
-The main futile goal is to get a preview when sharing a custom animation in Whatsapp.
+The main futile goal of this script is to provide a preview when sharing a custom animation in Whatsapp (and avoiding linking to sharing sites which might not be safe for your audience).
 
 - Each upload gets a new random name.
-- Everybody can access the direct link to the gif and an html page that provide the gif and the correct preview.
-- Those who know a _secret_ word, can fetch new gifs and see the list of all available gifs.
+- A copy of each image is stored on your server.
+- Everybody with the link can access the an html page with the animation in it.
+- Those who know a _secret_ word, can add new gifs and see the list of all available gifs.
 
-It also supports Webp animations.
+The script supports Gif and Webp animations.
 
 This tool is meant for personal usage only and does not provide the features you would expect from a public gif repository.
 
@@ -16,7 +17,6 @@ This tool is meant for personal usage only and does not provide the features you
 
 - `gif clone https://github.com/aoloe/php-gifgifgif.git gifgifgif`
 - `wget https://raw.githubusercontent.com/aoloe/php-tiny-template/master/src/TinyTemplate.php`.
-- `wget TinyRoute`.
 - `wget https://raw.githubusercontent.com/aoloe/php-tiny-route/master/src/TinyRoute.php`.
 - add an `.htaccess`:
 
@@ -30,6 +30,36 @@ This tool is meant for personal usage only and does not provide the features you
 - create a `config.php` file based on `config-demo.php`.
 - create a `style.css` file (a demo file is provided).
 - create the `media` directory.
+
+## Usage
+
+- Adding an image: `http://example.com/gifgifgif/add/secret`.  
+  Put the url of the original gif file in the input field and press ok.
+- List of the images: `http://example.com/gifgifgif/list/secret`.  
+  You'll get a preview with the first frame of each animation.
+- Viewing an image: `http://example.com/gifgifgif/hash-hash-hash/gif/view`.  
+  This is the link you should be sharing. The visitor should not be able to see the list of the stored images or add new images.
+- The secret is a word you've set in the configuration file. It's a weak protection for the the listing of all stored images and for adding new images.
+
+## Security
+
+The upload and listing are protected by a weak password mechanism.
+
+The secret should not be shared with other people, but since it appears in the url, it can easily be discovered by other people.
+
+Curently, the main reason for not implementing a better identifiaction process s that it's very likely that nobody will use a strong password to protect his personal list of animated gifs.
+
+What you  risk? In the best case you'll get more or lessfunny gifs from strangers... and in the worst case your website gets be abused as an exchange platform for illegal material.
+
+Probably, the best profilaxy is to keep an eye on the activity and remove the script from the server if you do not use it anymore.
+
+## Copyrights
+
+You should avoid to post links to _your_ images in public forums.
+
+Most images in the animated Gifs you find online are protected by copyrights and depending on the place you're liviving you might or not be allowed to share them with your friends.
+
+If you want to be on the safe side, you should keep an eye on the visitors of your site and avoid that strangers are looking at _your_ Gifs.
 
 ## Implementation notes
 
