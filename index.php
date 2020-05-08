@@ -18,26 +18,28 @@ function uuidv4() {
     return $result;
 }
 
-$html_template = <<<'EOT'
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>gifgifgif - {{title}}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{css_path}}/style.css">
-  </head>
-  <body>
-    <h1>{{title}}</h1>
-    {{body}}
-  </body>
-</html>
-EOT;
-
-
 $router = new Aoloe\TinyRoute\Router();
 $request = Aoloe\TinyRoute\HttpRequest::create();
 $response = new Aoloe\TinyRoute\HttpResponse();
+
+$html_template = Aoloe\TinyTemplate::factory()->
+    set_delimiter('\{\[', ']}')->
+    add('css_path', $request->get_url())->
+    fetch(<<<'EOT'
+        <!DOCTYPE html>
+        <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <title>gifgifgif - {{title}}</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" href="{[css_path]}/style.css">
+          </head>
+          <body>
+            <h1>{{title}}</h1>
+            {{body}}
+          </body>
+        </html>
+        EOT);
 
 $router->get('/add/(\w*)', function($secret) use ($html_template, $config, $response) {
     if ($config['secret'] !== $secret) {
@@ -189,7 +191,6 @@ $router->get('/list/(\w*)', function($secret) use ($html_template, $config, $req
 
     $response->respond(Aoloe\TinyTemplate::factory()->
         add('title', 'My Gifs')->
-        add('css_path', $request->get_url())->
         add('body', $add_html.'<ul class="list">'.implode("\n", $li_html).'</ul></p>')->
         fetch($html_template));
 });
