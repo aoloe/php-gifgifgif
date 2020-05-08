@@ -186,10 +186,15 @@ $router->get('/list/(\w*)', function($secret) use ($html_template, $config, $req
                 '<li><a href="{{url}}"><img src="{{url_preview}}"></a></li>');
     }, $request);
 
+    $add_html = Aoloe\TinyTemplate::factory()->
+        add('url', $request->get_url())->
+        add('secret', $secret)->
+        fetch('<p><a href="{{url}}/add/{{secret}}">Add</a></p>');
+
     $response->respond(Aoloe\TinyTemplate::factory()->
         add('title', 'My Gifs')->
         add('css_path', $request->get_url())->
-        add('body', '<ul class="list">'.implode("\n", $li_html).'</ul></p>')->
+        add('body', $add_html.'<ul class="list">'.implode("\n", $li_html).'</ul></p>')->
         fetch($html_template));
 });
 
