@@ -45,11 +45,11 @@ This tool is meant for personal usage only and does not provide the features you
 
 The upload and listing are protected by a weak password mechanism.
 
-The secret should not be shared with other people, but since it appears in the url, it can easily be discovered by other people.
+The secret should not be shared with other people, but since it appears in the url, it can easily be discovered by anybody who has access to your computer.
 
-Curently, the main reason for not implementing a better identifiaction process s that it's very likely that nobody will use a strong password to protect his personal list of animated gifs.
+Curently, the main reason for not implementing a better identification process is, that it's very likely that nobody will use a strong password to protect his personal list of animated gifs. So: why bother?
 
-What you  risk? In the best case you'll get more or lessfunny gifs from strangers... and in the worst case your website gets be abused as an exchange platform for illegal material.
+What you  risk? In the best case you'll get more or less funny gifs from strangers... and in the worst case your website gets be abused as an exchange platform for illegal material.
 
 Probably, the best profilaxy is to keep an eye on the activity and remove the script from the server if you do not use it anymore.
 
@@ -57,7 +57,7 @@ Probably, the best profilaxy is to keep an eye on the activity and remove the sc
 
 You should avoid to post links to _your_ images in public forums.
 
-Most images in the animated Gifs you find online are protected by copyrights and depending on the place you're liviving you might or not be allowed to share them with your friends.
+Most animated Gifs you find online containt images that are protected by copyrights and depending on the place you're liviving you might be allowed to share them more or less freely.
 
 If you want to be on the safe side, you should keep an eye on the visitors of your site and avoid that strangers are looking at _your_ Gifs.
 
