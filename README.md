@@ -1,12 +1,12 @@
 # gif gif gif
 
-Download animated Gifs from an url and provide a _good quality_ url.
+Download animated Gifs from an url and provide a _good quality_ url to be shared with friends.
 
-The main futile goal of this script is to provide a preview when sharing a custom animation in Whatsapp (and avoiding linking to sharing sites which might not be safe for your audience).
+The main futile goal of this script is simple: provide a preview when sharing a custom animation in Whatsapp (and avoiding linking to sharing sites which might not be safe for your audience).
 
 - Each upload gets a new random name.
 - A copy of each image is stored on your server.
-- Everybody with the link can access the an html page with the animation in it.
+- Everybody with the link can access the html page with the animation in it.
 - Those who know a _secret_ word, can add new gifs and see the list of all available gifs.
 
 The script supports Gif and Webp animations.
@@ -102,3 +102,8 @@ It's very similar as for the gif files:
 - <https://developers.google.com/speed/webp/docs/riff_container#animation>
 - the delimiter is `ANMF`
 - there are no _closing_ bytes
+
+## Todo
+
+- Store static versions of the preview (no need to calculate them each time).
+- Let the user delete animations from the list.
